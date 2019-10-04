@@ -4,8 +4,7 @@
 @section('title', '掲示板')
 {{--はめ込む部品開始--}}
 @section('content')
-
-
+    <?php $week = ["日", "月", "火", "水", "木", "金", "土"] ?>
 
     <div class="row">
         <div class="col-sm-12">
@@ -39,10 +38,12 @@
     <div class="mx-auto" style="width: 450px;">
         <div class="row">
             <div class="col-sm-12">
+                <?php $c = 0; ?>
                 @foreach($articles as $article)
+                    <?php $c ++; ?>
                     <div class="card border-primary mb-4" style="max-width: 30rem;">
                         <div class="card-body text-primary">
-                            <h5 class="card-title">{{$article->title}}</h5>
+                            <h5 class="card-title">{{$c}} ： {{$article->title}} ：{{$article->created_at->format('Y年m月d日(') . $week[$article->created_at->format('w')] . $article->created_at->format(')H:i:s')}}</h5>
                             <p class="card-text">{{$article->body}} </p>
 　　　　　　　　　　　　　　    {{--削除機能追加--}}
                             <form method="post" action="/article/delete/{{$article->id}}">
